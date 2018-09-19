@@ -1,16 +1,35 @@
 import React, { Component } from "react";
 import "./MainDashboard.css";
+import { MainDashboardCard } from "./components/MainDashboardCard";
 
 class MainDashboard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      devData: {}
+    };
+  }
+
+  apiCall = async () => {
+    const response = await fetch("/data");
+    const devData = await response.json();
+    this.setState({ devData });
+  };
+
+  componentDidMount() {
+    this.apiCall();
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Healthcheck Dashboard</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="grid-container">
+        <MainDashboardCard
+          background={this.state.devData.frontEndHealthcheckColor}
+          title="Development"
+        />
+        <MainDashboardCard background="green" title="Testing" />
+        <MainDashboardCard background="red" title="Stage" />
+        <MainDashboardCard background="green" title="Production" />
+        <h1>{this.state.devData.frontEndHealthcheckColor}</h1>
       </div>
     );
   }
