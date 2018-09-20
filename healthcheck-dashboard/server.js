@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 
-const { getDevHealthcheck } = require("./data");
+const { getHealthcheckData } = require("./data");
 
 app.get("/data", async (req, res) => {
-  const response = await getDevHealthcheck();
+  const response = await getHealthcheckData();
   console.log(response);
   res.send(response);
 });

@@ -45,26 +45,55 @@ const prodUrls = {
 
 const getDevHealthcheck = async () => {
   const devData = {};
-  const frontEndHealthcheckDev = await fetch(devUrls.healthcheckPathFrontEnd, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*"
-    }
-  });
+  const frontEndHealthcheckDev = await fetch(devUrls.healthcheckPathFrontEnd);
+
   if (frontEndHealthcheckDev.status === 200) {
     devData.frontEndHealthcheck = "PASSING";
-    devData.frontEndHealthcheckColor = "green";
   } else {
     devData.frontEndHealthcheck = "FAILING";
   }
-  //   const backEndHealthcheckDev = await fetch(devUrls.healthcheckPathBackEnd);
-  //   if (backEndHealthcheckDev.status === 200) {
-  //     devData.backEndHealthcheck = "PASSING";
-  //   } else {
-  //     devData.backEndHealthcheck = "FAILING";
-  //   }
+  const backEndHealthcheckDev = await fetch(devUrls.healthcheckPathBackEnd);
+  if (backEndHealthcheckDev.status === 200) {
+    devData.backEndHealthcheck = "PASSING";
+  } else {
+    devData.backEndHealthcheck = "FAILING";
+  }
+
+  if (
+    devData.frontEndHealthcheck === "PASSING" &&
+    devData.backEndHealthcheck === "PASSING"
+  ) {
+    devData.healthcheckColor = "green";
+  } else {
+    devData.healthcheckColor = "red";
+  }
   return devData;
+};
+
+const getTestHealthcheck = async () => {
+  const testData = {};
+  const frontEndHealthcheckTest = await fetch(testUrls.healthcheckPathFrontEnd);
+  if (frontEndHealthcheckTest.status === 200) {
+    testData.frontEndHealthcheck = "PASSING";
+  } else {
+    testData.frontEndHealthcheck = "FAILING";
+  }
+  const backEndHealthcheckTest = await fetch(testUrls.healthcheckPathBackEnd);
+  if (backEndHealthcheckTest.status === 200) {
+    testData.backEndHealthcheck = "PASSING";
+  } else {
+    testData.backEndHealthcheck = "FAILING";
+  }
+
+  if (
+    testData.frontEndHealthcheck === "PASSING" &&
+    testData.backEndHealthcheck === "PASSING"
+  ) {
+    testData.healthcheckColor = "green";
+  } else {
+    testData.healthcheckColor = "red";
+  }
+  return testData;
 };
 
 // const getStatus = async () => {
@@ -100,9 +129,17 @@ const getDevHealthcheck = async () => {
 //   }
 // };
 
-// getDevHealthcheck();
+const getHealthcheckData = async () => {
+  const devData = await getDevHealthcheck();
+  const testData = await getTestHealthcheck();
+  const data = {
+    devData,
+    testData
+  };
+  return data;
+};
 
-module.exports = { getDevHealthcheck };
+module.exports = { getHealthcheckData };
 
 // setInterval(getDevHealthcheck, 30000);
 // setInterval(getStatus, 30000);

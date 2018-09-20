@@ -6,30 +6,46 @@ class MainDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      devData: {}
+      allData: {
+        devData: {
+          frontEndHealthcheck: "LOADING",
+          backEndHealthcheck: "LOADING",
+          healthcheckColor: "yellow"
+        },
+        testData: {
+          frontEndHealthcheck: "LOADING",
+          backEndHealthcheck: "LOADING",
+          healthcheckColor: "yellow"
+        }
+      }
     };
   }
 
   apiCall = async () => {
     const response = await fetch("/data");
-    const devData = await response.json();
-    this.setState({ devData });
+    const allData = await response.json();
+    console.log(allData);
+    this.setState({ allData });
+    console.log(this.state);
   };
 
   componentDidMount() {
     this.apiCall();
   }
+
   render() {
     return (
       <div className="grid-container">
         <MainDashboardCard
-          background={this.state.devData.frontEndHealthcheckColor}
+          background={this.state.allData.devData.healthcheckColor}
           title="Development"
         />
-        <MainDashboardCard background="green" title="Testing" />
+        <MainDashboardCard
+          background={this.state.allData.testData.healthcheckColor}
+          title="Testing"
+        />
         <MainDashboardCard background="red" title="Stage" />
         <MainDashboardCard background="green" title="Production" />
-        <h1>{this.state.devData.frontEndHealthcheckColor}</h1>
       </div>
     );
   }
