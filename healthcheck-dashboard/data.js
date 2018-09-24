@@ -36,7 +36,7 @@ const prodUrls = {
   healthcheckPathFrontEnd:
     "https://prod-register-a-food-business.azurewebsites.net/status/healthcheck",
   healthcheckPathBackEnd:
-    "https://prod-register-a-food-business-serviceazurewebsites.net/api/status/healthcheck",
+    "https://prod-register-a-food-business-service.azurewebsites.net/api/status/healthcheck",
   statusPathFrontEnd:
     "https://prod-register-a-food-business.azurewebsites.net/status/all",
   statusPathBackEnd:
@@ -96,45 +96,100 @@ const getTestHealthcheck = async () => {
   return testData;
 };
 
-// const getStatus = async () => {
-//     if (frontEndStatus.status === 200) {
-//       const frontEndStatusJson = await frontEndStatus.json();
-//       for (let statusName in frontEndStatusJson) {
-//         if (frontEndStatusJson[statusName] === false) {
-//           // Indicates that a service failed the last time it was called
-//           console.log(statusName + ": " +`${frontEndStatusJson[statusName]}`);
-//         } else if (
-//           statusName.includes("Failed") &&
-//           Number.isInteger(frontEndStatusJson[statusName]) &&
-//           frontEndStatusJson[statusName] > 0
-//         ) {
-//           // Indicates that a service has failed at least once
-//           console.log(
-//             statusName + ": " + `${frontEndStatusJson[statusName]}`
-//           );
-//         } else {
-//           // Indicates that a service is currently working or worked the most recent time it was called.
-//           console.log(
-//             statusName + ": " + `${frontEndStatusJson[statusName]}`
-//           );
-//         }
-//       }
-//     } else {
-//       console.log(
-//         `FAILED. Front end in environment "${environment}" responded with status: ${
-//           frontEndStatus.status
-//         }`.red
-//       );
-//     }
-//   }
-// };
+const getStagingHealthcheck = async () => {
+  const stagingData = {};
+  const frontEndHealthcheckStaging = await fetch(
+    stagingUrls.healthcheckPathFrontEnd
+  );
+  if (frontEndHealthcheckStaging.status === 200) {
+    stagingData.frontEndHealthcheck = "PASSING";
+  } else {
+    stagingData.frontEndHealthcheck = "FAILING";
+  }
+  const backEndHealthcheckStaging = await fetch(
+    stagingUrls.healthcheckPathBackEnd
+  );
+  if (backEndHealthcheckStaging.status === 200) {
+    stagingData.backEndHealthcheck = "PASSING";
+  } else {
+    stagingData.backEndHealthcheck = "FAILING";
+  }
+
+  if (
+    stagingData.frontEndHealthcheck === "PASSING" &&
+    stagingData.backEndHealthcheck === "PASSING"
+  ) {
+    stagingData.healthcheckColor = "green";
+  } else {
+    stagingData.healthcheckColor = "red";
+  }
+  return stagingData;
+};
+
+const getProdHealthcheck = async () => {
+  const prodData = {};
+  const frontEndHealthcheckProd = await fetch(prodUrls.healthcheckPathFrontEnd);
+  if (frontEndHealthcheckProd.status === 200) {
+    prodData.frontEndHealthcheck = "PASSING";
+  } else {
+    prodData.frontEndHealthcheck = "FAILING";
+  }
+  const backEndHealthcheckProd = await fetch(prodUrls.healthcheckPathBackEnd);
+  if (backEndHealthcheckProd.status === 200) {
+    prodData.backEndHealthcheck = "PASSING";
+  } else {
+    prodData.backEndHealthcheck = "FAILING";
+  }
+
+  if (
+    prodData.frontEndHealthcheck === "PASSING" &&
+    prodData.backEndHealthcheck === "PASSING"
+  ) {
+    prodData.healthcheckColor = "green";
+  } else {
+    prodData.healthcheckColor = "red";
+  }
+  return prodData;
+};
+
+const getDevStatus = async () => {
+  if (frontEndStatus.status === 200) {
+    const frontEndStatusJson = await frontEndStatus.json();
+    for (let statusName in frontEndStatusJson) {
+      if (frontEndStatusJson[statusName] === false) {
+        // Indicates that a service failed the last time it was called
+        console.log(statusName + ": " + `${frontEndStatusJson[statusName]}`);
+      } else if (
+        statusName.includes("Failed") &&
+        Number.isInteger(frontEndStatusJson[statusName]) &&
+        frontEndStatusJson[statusName] > 0
+      ) {
+        // Indicates that a service has failed at least once
+        console.log(statusName + ": " + `${frontEndStatusJson[statusName]}`);
+      } else {
+        // Indicates that a service is currently working or worked the most recent time it was called.
+        console.log(statusName + ": " + `${frontEndStatusJson[statusName]}`);
+      }
+    }
+  } else {
+    console.log(
+      `FAILED. Front end in environment "${environment}" responded with status: ${
+        frontEndStatus.status
+      }`.red
+    );
+  }
+};
 
 const getHealthcheckData = async () => {
   const devData = await getDevHealthcheck();
   const testData = await getTestHealthcheck();
+  const stagingData = await getStagingHealthcheck();
+  const prodData = await getProdHealthcheck();
   const data = {
     devData,
-    testData
+    testData,
+    stagingData,
+    prodData
   };
   return data;
 };
