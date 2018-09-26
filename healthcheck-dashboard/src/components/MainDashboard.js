@@ -9,23 +9,19 @@ class MainDashboard extends Component {
       allData: {
         devData: {
           frontEndHealthcheck: "LOADING",
-          backEndHealthcheck: "LOADING",
-          healthcheckColor: "yellow"
+          backEndHealthcheck: "LOADING"
         },
         testData: {
           frontEndHealthcheck: "LOADING",
-          backEndHealthcheck: "LOADING",
-          healthcheckColor: "yellow"
+          backEndHealthcheck: "LOADING"
         },
         stagingData: {
           frontEndHealthcheck: "LOADING",
-          backEndHealthcheck: "LOADING",
-          healthcheckColor: "yellow"
+          backEndHealthcheck: "LOADING"
         },
         prodData: {
           frontEndHealthcheck: "LOADING",
-          backEndHealthcheck: "LOADING",
-          healthcheckColor: "yellow"
+          backEndHealthcheck: "LOADING"
         }
       }
     };
@@ -36,7 +32,6 @@ class MainDashboard extends Component {
     const allData = await response.json();
     console.log(allData);
     this.setState({ allData });
-    console.log(this.state);
   };
 
   componentDidMount() {
@@ -51,35 +46,33 @@ class MainDashboard extends Component {
     return (
       <div className="grid-container">
         <MainDashboardCard
-          background={this.state.allData.devData.healthcheckColor}
           title="Development"
-          frontendStatus={this.state.allData.devData.frontEndHealthcheck}
-          backendStatus={this.state.allData.devData.backEndHealthcheck}
+          frontendHealthcheck={this.state.allData.devData.frontEndHealthcheck}
+          backendHealthcheck={this.state.allData.devData.backEndHealthcheck}
           href="/dev-status"
           onClick={this.handleClick}
         />
 
         <MainDashboardCard
-          background={this.state.allData.testData.healthcheckColor}
           title="Testing"
-          frontendStatus={this.state.allData.testData.frontEndHealthcheck}
-          backendStatus={this.state.allData.testData.backEndHealthcheck}
+          frontendHealthcheck={this.state.allData.testData.frontEndHealthcheck}
+          backendHealthcheck={this.state.allData.testData.backEndHealthcheck}
           href="/test-status"
           onClick={this.handleClick}
         />
         <MainDashboardCard
-          background={this.state.allData.stagingData.healthcheckColor}
           title="Staging"
-          frontendStatus={this.state.allData.stagingData.frontEndHealthcheck}
-          backendStatus={this.state.allData.stagingData.backEndHealthcheck}
+          frontendHealthcheck={
+            this.state.allData.stagingData.frontEndHealthcheck
+          }
+          backendHealthcheck={this.state.allData.stagingData.backEndHealthcheck}
           href="/staging-status"
           onClick={this.handleClick}
         />
         <MainDashboardCard
-          background={this.state.allData.prodData.healthcheckColor}
           title="Production"
-          frontendStatus={this.state.allData.prodData.frontEndHealthcheck}
-          backendStatus={this.state.allData.prodData.backEndHealthcheck}
+          frontendHealthcheck={this.state.allData.prodData.frontEndHealthcheck}
+          backendHealthcheck={this.state.allData.prodData.backEndHealthcheck}
           href="/prod-status"
           onClick={this.handleClick}
         />

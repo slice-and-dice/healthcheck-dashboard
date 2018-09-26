@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => (
-  <ul class="header">
-    <li class="listItem">
+  <ul className="header">
+    <li className="listItem">
       <Link style={{ color: "white", textDecoration: "none" }} to="/">
         Home
       </Link>
     </li>
-    <li class="listItem">
+    <li className="listItem">
       <Link style={{ color: "white", textDecoration: "none" }} to="/dev-status">
         Dev Status
       </Link>
     </li>
-    <li class="listItem">
+    <li className="listItem">
       <Link
         style={{ color: "white", textDecoration: "none" }}
         to="/test-status"
@@ -22,7 +22,7 @@ const Header = () => (
         Test Status
       </Link>
     </li>
-    <li class="listItem">
+    <li className="listItem">
       <Link
         style={{ color: "white", textDecoration: "none" }}
         to="/staging-status"
@@ -30,7 +30,7 @@ const Header = () => (
         Staging Status
       </Link>
     </li>
-    <li class="listItem">
+    <li className="listItem">
       <Link
         style={{ color: "white", textDecoration: "none" }}
         to="/prod-status"
