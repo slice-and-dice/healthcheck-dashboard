@@ -31,9 +31,7 @@ const getDevStatus = async () => {
   const devFrontendStatusData = {};
   const frontEndStatusDev = await fetch(devUrls.statusPathFrontEnd);
   if (frontEndStatusDev.status === 200) {
-    devFrontendStatusData.frontendStatus = `Dev Frontend is PASSING with status: ${
-      frontEndStatusDev.status
-    }`;
+    devFrontendStatusData.frontendStatus = `${frontEndStatusDev.status}`;
     const frontEndStatusDevJson = await frontEndStatusDev.json();
     for (let statusName in frontEndStatusDevJson) {
       devFrontendStatusData[statusName] = `${
@@ -41,26 +39,20 @@ const getDevStatus = async () => {
       }`;
     }
   } else {
-    devFrontendStatusData.frontendStatus = `Dev frontend is Failing with status: ${
-      frontEndStatusDev.status
-    }`;
+    devFrontendStatusData.frontendStatus = `${frontEndStatusDev.status}`;
   }
 
   const devBackendStatusData = {};
   const backEndStatusDev = await fetch(devUrls.statusPathBackEnd);
   if (backEndStatusDev.status === 200) {
-    devBackendStatusData.backendStatus = `Dev Backend is PASSING with status: ${
-      backEndStatusDev.status
-    }`;
+    devBackendStatusData.backendStatus = `${backEndStatusDev.status}`;
     const backEndStatusDevJson = await backEndStatusDev.json();
     console.log(backEndStatusDevJson);
     for (let statusName in backEndStatusDevJson) {
       devBackendStatusData[statusName] = `${backEndStatusDevJson[statusName]}`;
     }
   } else {
-    devBackendStatusData.backendStatus = `Dev backend is Failing with status: ${
-      backEndStatusDev.status
-    }`;
+    devBackendStatusData.backendStatus = `${backEndStatusDev.status}`;
   }
   const devStatusData = {
     devFrontendStatusData,
@@ -74,9 +66,7 @@ const getProdStatus = async () => {
   const prodFrontendStatusData = {};
   const frontEndStatusProd = await fetch(prodUrls.statusPathFrontEnd);
   if (frontEndStatusProd.status === 200) {
-    prodFrontendStatusData.frontendStatus = `Prod Frontend is PASSING with status: ${
-      frontEndStatusProd.status
-    }`;
+    prodFrontendStatusData.frontendStatus = `${frontEndStatusProd.status}`;
     const frontEndStatusProdJson = await frontEndStatusProd.json();
     for (let statusName in frontEndStatusProdJson) {
       prodFrontendStatusData[statusName] = `${
@@ -84,17 +74,13 @@ const getProdStatus = async () => {
       }`;
     }
   } else {
-    prodFrontendStatusData.frontendStatus = `Prod frontend is Failing with status: ${
-      frontEndStatusProd.status
-    }`;
+    prodFrontendStatusData.frontendStatus = `${frontEndStatusProd.status}`;
   }
 
   const prodBackendStatusData = {};
   const backEndStatusProd = await fetch(prodUrls.statusPathBackEnd);
   if (backEndStatusProd.status === 200) {
-    prodBackendStatusData.backendStatus = `Prod Backend is PASSING with status: ${
-      backEndStatusProd.status
-    }`;
+    prodBackendStatusData.backendStatus = `${backEndStatusProd.status}`;
     const backEndStatusProdJson = await backEndStatusProd.json();
     console.log(backEndStatusProdJson);
     for (let statusName in backEndStatusProdJson) {
@@ -103,9 +89,7 @@ const getProdStatus = async () => {
       }`;
     }
   } else {
-    prodBackendStatusData.backendStatus = `Prod backend is Failing with status: ${
-      backEndStatusProd.status
-    }`;
+    prodBackendStatusData.backendStatus = `${backEndStatusProd.status}`;
   }
   const prodStatusData = {
     prodFrontendStatusData,
@@ -119,9 +103,7 @@ const getTestStatus = async () => {
   const testFrontendStatusData = {};
   const frontEndStatusTest = await fetch(testUrls.statusPathFrontEnd);
   if (frontEndStatusTest.status === 200) {
-    testFrontendStatusData.frontendStatus = `Test Frontend is PASSING with status: ${
-      frontEndStatusTest.status
-    }`;
+    testFrontendStatusData.frontendStatus = `${frontEndStatusTest.status}`;
     const frontEndStatusTestJson = await frontEndStatusTest.json();
     for (let statusName in frontEndStatusTestJson) {
       testFrontendStatusData[statusName] = `${
@@ -129,17 +111,13 @@ const getTestStatus = async () => {
       }`;
     }
   } else {
-    testFrontendStatusData.frontendStatus = `Test frontend is Failing with status: ${
-      frontEndStatusTest.status
-    }`;
+    testFrontendStatusData.frontendStatus = `${frontEndStatusTest.status}`;
   }
 
   const testBackendStatusData = {};
   const backEndStatusTest = await fetch(testUrls.statusPathBackEnd);
   if (backEndStatusTest.status === 200) {
-    testBackendStatusData.backendStatus = `Test Backend is PASSING with status: ${
-      backEndStatusTest.status
-    }`;
+    testBackendStatusData.backendStatus = `${backEndStatusTest.status}`;
     const backEndStatusTestJson = await backEndStatusTest.json();
     for (let statusName in backEndStatusTestJson) {
       testBackendStatusData[statusName] = `${
@@ -147,9 +125,7 @@ const getTestStatus = async () => {
       }`;
     }
   } else {
-    testBackendStatusData.backendStatus = `Test backend is Failing with status: ${
-      backEndStatusTest.status
-    }`;
+    testBackendStatusData.backendStatus = `${backEndStatusTest.status}`;
   }
   const testStatusData = {
     testFrontendStatusData,
@@ -163,7 +139,7 @@ const getStagingStatus = async () => {
   const stagingFrontendStatusData = {};
   const frontEndStatusStaging = await fetch(stagingUrls.statusPathFrontEnd);
   if (frontEndStatusStaging.status === 200) {
-    stagingFrontendStatusData.frontendStatus = `Staging Frontend is PASSING with status: ${
+    stagingFrontendStatusData.frontendStatus = `${
       frontEndStatusStaging.status
     }`;
     const frontEndStatusStagingJson = await frontEndStatusStaging.json();
@@ -173,7 +149,7 @@ const getStagingStatus = async () => {
       }`;
     }
   } else {
-    stagingFrontendStatusData.frontendStatus = `Staging frontend is Failing with status: ${
+    stagingFrontendStatusData.frontendStatus = `${
       frontEndStatusStaging.status
     }`;
   }
@@ -181,9 +157,7 @@ const getStagingStatus = async () => {
   const stagingBackendStatusData = {};
   const backEndStatusStaging = await fetch(stagingUrls.statusPathBackEnd);
   if (backEndStatusStaging.status === 200) {
-    stagingBackendStatusData.backendStatus = `Staging Backend is PASSING with status: ${
-      backEndStatusStaging.status
-    }`;
+    stagingBackendStatusData.backendStatus = `${backEndStatusStaging.status}`;
     const backEndStatusStagingJson = await backEndStatusStaging.json();
     for (let statusName in backEndStatusStagingJson) {
       stagingBackendStatusData[statusName] = `${
@@ -191,9 +165,7 @@ const getStagingStatus = async () => {
       }`;
     }
   } else {
-    stagingBackendStatusData.backendStatus = `Staging backend is Failing with status: ${
-      backEndStatusStaging.status
-    }`;
+    stagingBackendStatusData.backendStatus = `${backEndStatusStaging.status}`;
   }
   const stagingStatusData = {
     stagingFrontendStatusData,
@@ -214,7 +186,5 @@ const getStatusData = async env => {
     return getStagingStatus();
   }
 };
-
+// setInterval(getStatusData, 300);
 module.exports = { getStatusData };
-
-setInterval(getStatusData, 30000);

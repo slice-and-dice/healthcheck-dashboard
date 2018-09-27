@@ -116,4 +116,4 @@ const getHealthcheckData = async () => {
 
 module.exports = { getHealthcheckData };
 
-setInterval(getDevHealthcheck, 30000);
+// setInterval(getDevHealthcheck, 300);

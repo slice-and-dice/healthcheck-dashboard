@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { StatusTable } from "./StatusTable";
+import "./TestStatus.css";
 
 class TestStatus extends Component {
   constructor() {
@@ -59,14 +60,21 @@ class TestStatus extends Component {
   };
 
   componentDidMount() {
-    this.apiCall();
+    const apiCall = this.apiCall;
+    setInterval(apiCall, 30000);
   }
 
   render() {
     return (
-      <div>
-        <StatusTable data={this.state.testData.testFrontendStatusData} />
-        <StatusTable data={this.state.testData.testBackendStatusData} />
+      <div className="flex-box">
+        <div className="front-end">
+          <h2> Front end </h2>
+          <StatusTable data={this.state.testData.testFrontendStatusData} />
+        </div>
+        <div className="back-end">
+          <h2> Back end </h2>
+          <StatusTable data={this.state.testData.testBackendStatusData} />
+        </div>
       </div>
     );
   }
