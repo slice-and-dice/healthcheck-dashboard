@@ -106,10 +106,5 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   exitWithMessageOnError "Kudu Sync failed"
 fi
 
-# 2. Select node version
-selectNodeVersion
-echo "Running npm config set scripts-prepend-node-path"
-eval $NPM_CMD config set scripts-prepend-node-path true
-
 ##################################################################################################################################
 echo "Finished successfully."
