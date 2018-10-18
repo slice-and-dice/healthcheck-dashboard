@@ -106,5 +106,7 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   exitWithMessageOnError "Kudu Sync failed"
 fi
 
+npm install
+
 ##################################################################################################################################
 echo "Finished successfully."
