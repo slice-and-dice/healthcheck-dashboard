@@ -106,6 +106,8 @@ if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
   exitWithMessageOnError "Kudu Sync failed"
 fi
 
+cd $DEPLOYMENT_TARGET
+ls
 npm install
 
 ##################################################################################################################################
