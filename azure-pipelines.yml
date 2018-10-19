@@ -10,14 +10,14 @@ steps:
   - script: npm -v
     displayName: "Npm version"
 
-  - script: npm install
+  - script: yarn
     displayName: "Install dependencies"
 
   - script: yarn build
     displayName: "Yarn build"
 
-  - script: rm -rf node_modules
-    displayName: "Remove node_modules"
+  - script: yarn --production
+    displayName: "Prune dependencies"
   
   - task: ArchiveFiles@2
     inputs:
