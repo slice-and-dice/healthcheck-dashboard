@@ -7,10 +7,6 @@ class MainDashboard extends Component {
     super();
     this.state = {
       allData: {
-        devData: {
-          frontEndHealthcheck: "LOADING",
-          backEndHealthcheck: "LOADING"
-        },
         testData: {
           frontEndHealthcheck: "LOADING",
           backEndHealthcheck: "LOADING"
@@ -45,14 +41,6 @@ class MainDashboard extends Component {
   render() {
     return (
       <div className="grid-container">
-        <MainDashboardCard
-          title="Development"
-          frontendHealthcheck={this.state.allData.devData.frontEndHealthcheck}
-          backendHealthcheck={this.state.allData.devData.backEndHealthcheck}
-          href="/dev-status"
-          onClick={this.handleClick}
-        />
-
         <MainDashboardCard
           title="Testing"
           frontendHealthcheck={this.state.allData.testData.frontEndHealthcheck}

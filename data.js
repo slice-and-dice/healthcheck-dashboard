@@ -1,12 +1,5 @@
 const fetch = require("node-fetch");
 
-const devUrls = {
-  healthcheckPathFrontEnd:
-    "https://dev-register-a-food-business.azurewebsites.net/status/healthcheck",
-  healthcheckPathBackEnd:
-    "https://dev-register-a-food-business-service.azurewebsites.net/api/status/healthcheck"
-};
-
 const testUrls = {
   healthcheckPathFrontEnd:
     "https://test-register-a-food-business.azurewebsites.net/status/healthcheck",
@@ -25,24 +18,6 @@ const prodUrls = {
     "https://prod-register-a-food-business.azurewebsites.net/status/healthcheck",
   healthcheckPathBackEnd:
     "https://prod-register-a-food-business-service.azurewebsites.net/api/status/healthcheck"
-};
-
-const getDevHealthcheck = async () => {
-  const devData = {};
-  const frontEndHealthcheckDev = await fetch(devUrls.healthcheckPathFrontEnd);
-
-  if (frontEndHealthcheckDev.status === 200) {
-    devData.frontEndHealthcheck = "PASSING";
-  } else {
-    devData.frontEndHealthcheck = "FAILING";
-  }
-  const backEndHealthcheckDev = await fetch(devUrls.healthcheckPathBackEnd);
-  if (backEndHealthcheckDev.status === 200) {
-    devData.backEndHealthcheck = "PASSING";
-  } else {
-    devData.backEndHealthcheck = "FAILING";
-  }
-  return devData;
 };
 
 const getTestHealthcheck = async () => {
@@ -101,12 +76,10 @@ const getProdHealthcheck = async () => {
 };
 
 const getHealthcheckData = async () => {
-  const devData = await getDevHealthcheck();
   const testData = await getTestHealthcheck();
   const stagingData = await getStagingHealthcheck();
   const prodData = await getProdHealthcheck();
   const data = {
-    devData,
     testData,
     stagingData,
     prodData

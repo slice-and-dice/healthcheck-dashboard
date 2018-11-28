@@ -10,11 +10,6 @@ const Header = () => (
       </Link>
     </li>
     <li className="listItem">
-      <Link style={{ color: "white", textDecoration: "none" }} to="/dev-status">
-        Dev Status
-      </Link>
-    </li>
-    <li className="listItem">
       <Link
         style={{ color: "white", textDecoration: "none" }}
         to="/test-status"

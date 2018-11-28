@@ -1,12 +1,5 @@
 const fetch = require("node-fetch");
 
-const devUrls = {
-  statusPathFrontEnd:
-    "https://dev-register-a-food-business.azurewebsites.net/status/all",
-  statusPathBackEnd:
-    "https://dev-register-a-food-business-service.azurewebsites.net/api/status/all"
-};
-
 const testUrls = {
   statusPathFrontEnd:
     "https://test-register-a-food-business.azurewebsites.net/status/all",
@@ -25,41 +18,6 @@ const prodUrls = {
     "https://prod-register-a-food-business.azurewebsites.net/status/all",
   statusPathBackEnd:
     "https://prod-register-a-food-business-service.azurewebsites.net/api/status/all"
-};
-
-const getDevStatus = async () => {
-  const devFrontendStatusData = {};
-  const frontEndStatusDev = await fetch(devUrls.statusPathFrontEnd);
-  if (frontEndStatusDev.status === 200) {
-    devFrontendStatusData.frontendStatus = `${frontEndStatusDev.status}`;
-    const frontEndStatusDevJson = await frontEndStatusDev.json();
-    for (let statusName in frontEndStatusDevJson) {
-      devFrontendStatusData[statusName] = `${
-        frontEndStatusDevJson[statusName]
-      }`;
-    }
-  } else {
-    devFrontendStatusData.frontendStatus = `${frontEndStatusDev.status}`;
-  }
-
-  const devBackendStatusData = {};
-  const backEndStatusDev = await fetch(devUrls.statusPathBackEnd);
-  if (backEndStatusDev.status === 200) {
-    devBackendStatusData.backendStatus = `${backEndStatusDev.status}`;
-    const backEndStatusDevJson = await backEndStatusDev.json();
-    console.log(backEndStatusDevJson);
-    for (let statusName in backEndStatusDevJson) {
-      devBackendStatusData[statusName] = `${backEndStatusDevJson[statusName]}`;
-    }
-  } else {
-    devBackendStatusData.backendStatus = `${backEndStatusDev.status}`;
-  }
-  const devStatusData = {
-    devFrontendStatusData,
-    devBackendStatusData
-  };
-
-  return devStatusData;
 };
 
 const getProdStatus = async () => {
@@ -176,9 +134,7 @@ const getStagingStatus = async () => {
 };
 
 const getStatusData = async env => {
-  if (env === "dev") {
-    return getDevStatus();
-  } else if (env === "prod") {
+  if (env === "prod") {
     return getProdStatus();
   } else if (env === "test") {
     return getTestStatus();
